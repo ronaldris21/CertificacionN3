@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="appTudo.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:appTudo">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#6C8EFF" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BorderColor" Value="#5A56E8" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModels />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView
+                HasUnevenRows="True"
+                Header="{Binding}"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsBusy}"
+                ItemSelected="ListView_ItemSelected"
+                ItemsSource="{Binding BusesAll}"
+                RefreshCommand="{Binding RefreshCommand}"
+                SelectedItem="{Binding BusSeleccionado}">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Title}" />
+                                <Label Text="Estado" />
+                                <Picker
+                                    ItemsSource="{Binding Estados}"
+                                    SelectedItem="{Binding BusEdicion.estado}"
+                                    TabIndex="1" />
+                                <Label Text="Año" />
+                                <Entry
+                                    Keyboard="Numeric"
+                                    Placeholder="Año"
+                                    ReturnType="Next"
+                                    TabIndex="2"
+                                    Text="{Binding year, Mode=TwoWay}" />
+                                <Label Text="Capacidad personas" />
+                                <Entry
+                                    Keyboard="Numeric"
+                                    Placeholder="Capacidad personas"
+                                    ReturnType="Next"
+                                    TabIndex="3"
+                                    Text="{Binding capacidad, Mode=TwoWay}" />
+
+                                <Label Text="Color" />
+                                <Entry
+                                    Placeholder="Color"
+                                    ReturnCommand="{Binding PostPutCommand}"
+                                    ReturnType="Send"
+                                    TabIndex="4"
+                                    Text="{Binding BusEdicion.color, Mode=TwoWay}" />
+
+
+                                <Button
+                                    Command="{Binding PostPutCommand}"
+                                    HorizontalOptions="Center"
+                                    IsEnabled="{Binding IsNotBusy}"
+                                    Text="{Binding BtnTextPost}" />
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label
+                                        Grid.Column="0"
+                                        FontAttributes="Bold"
+                                        Text="Año" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        Text="Capacidad" />
+                                    <Label
+                                        Grid.Column="2"
+                                        FontAttributes="Bold"
+                                        Text="Color" />
+                                    <Label
+                                        Grid.Column="3"
+                                        FontAttributes="Bold"
+                                        Text="Estado" />
+                                </Grid>
+                            </StackLayout>
+                        </ContentView>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid BackgroundColor="{Binding ColorX}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Text="{Binding year}" />
+                                    <Label Grid.Column="1" Text="{Binding capacidad}" />
+                                    <Label Grid.Column="2" Text="{Binding color}" />
+                                    <Label Grid.Column="3" Text="{Binding estado}" />
+
+                                    <Grid.Triggers>
+                                        <DataTrigger
+                                            BindingContext="{Binding estado, Mode=TwoWay}"
+                                            TargetType="Grid"
+                                            Value="Nuevo">
+                                            <Setter Property="BackgroundColor" Value="LightGreen" />
+                                        </DataTrigger>
+
+                                        <DataTrigger
+                                            BindingContext="{Binding estado, Mode=TwoWay}"
+                                            TargetType="Grid"
+                                            Value="Servible">
+                                            <Setter Property="BackgroundColor" Value="LightYellow" />
+                                        </DataTrigger>
+
+                                        <DataTrigger
+                                            BindingContext="{Binding estado, Mode=TwoWay}"
+                                            TargetType="Grid"
+                                            Value="Inservible">
+                                            <Setter Property="BackgroundColor" Value="LightCoral" />
+                                        </DataTrigger>
+                                    </Grid.Triggers>
+                                </Grid>
+
+                                <StackLayout.Triggers>
+                                    <DataTrigger
+                                        BindingContext="{Binding estado, Mode=TwoWay}"
+                                        TargetType="StackLayout"
+                                        Value="Nuevo">
+                                        <Setter Property="BackgroundColor" Value="LightGreen" />
+                                    </DataTrigger>
+
+                                    <DataTrigger
+                                        BindingContext="{Binding estado, Mode=TwoWay}"
+                                        TargetType="StackLayout"
+                                        Value="Servible">
+                                        <Setter Property="BackgroundColor" Value="LightYellow" />
+                                    </DataTrigger>
+
+                                    <DataTrigger
+                                        BindingContext="{Binding estado, Mode=TwoWay}"
+                                        TargetType="StackLayout"
+                                        Value="Inservible">
+                                        <Setter Property="BackgroundColor" Value="LightCoral" />
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+
+
+</ContentPage>

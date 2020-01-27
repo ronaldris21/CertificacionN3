@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="appCalculadora.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:appCalculadora">
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="BorderWidth" Value="2" />
+            </Style>
+            <Style x:Key="btnNormal" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#eee" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="FontSize" Value="40" />
+            </Style>
+            <Style x:Key="btnOperacion" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#E8AD00" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="FontSize" Value="40" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <Grid
+            ColumnSpacing="1"
+            RowSpacing="1"
+            VerticalOptions="End">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="4"
+                FontSize="60"
+                HorizontalTextAlignment="End"
+                Text="{Binding TextOnScreen}"
+                TextColor="White"
+                VerticalTextAlignment="End" />
+
+
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="7"
+                Style="{StaticResource btnNormal}"
+                Text="7" />
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="8"
+                Style="{StaticResource btnNormal}"
+                Text="8" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="9"
+                Style="{StaticResource btnNormal}"
+                Text="9" />
+
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="4"
+                Style="{StaticResource btnNormal}"
+                Text="4" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="5"
+                Style="{StaticResource btnNormal}"
+                Text="5" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="6"
+                Style="{StaticResource btnNormal}"
+                Text="6" />
+
+            <Button
+                Grid.Row="3"
+                Grid.Column="0"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="1"
+                Style="{StaticResource btnNormal}"
+                Text="1" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="2"
+                Style="{StaticResource btnNormal}"
+                Text="2" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="3"
+                Style="{StaticResource btnNormal}"
+                Text="3" />
+
+
+            <Button
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="0"
+                Style="{StaticResource btnNormal}"
+                Text="0" />
+            <Button
+                Grid.Row="4"
+                Grid.Column="2"
+                Command="{Binding NumeroAdded}"
+                CommandParameter="."
+                Style="{StaticResource btnNormal}"
+                Text="." />
+
+
+            <!--  Operaciones Botonoes  -->
+            <Button
+                Grid.Row="1"
+                Grid.Column="3"
+                Command="{Binding OperacionCommand}"
+                CommandParameter="/"
+                Style="{StaticResource btnOperacion}"
+                Text="/" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="3"
+                Command="{Binding OperacionCommand}"
+                CommandParameter="*"
+                Style="{StaticResource btnOperacion}"
+                Text="*" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Command="{Binding OperacionCommand}"
+                CommandParameter="-"
+                Style="{StaticResource btnOperacion}"
+                Text="-" />
+            <Button
+                Grid.Row="4"
+                Grid.Column="3"
+                Command="{Binding OperacionCommand}"
+                CommandParameter="+"
+                Style="{StaticResource btnOperacion}"
+                Text="+" />
+            <Button
+                Grid.Row="5"
+                Grid.ColumnSpan="3"
+                Command="{Binding OperacionCommand}"
+                CommandParameter="="
+                Style="{StaticResource btnOperacion}"
+                Text="=" />
+            <Button
+                Grid.Row="5"
+                Grid.Column="3"
+                Command="{Binding OperacionCommand}"
+                CommandParameter="C"
+                Style="{StaticResource btnOperacion}"
+                Text="C" />
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
