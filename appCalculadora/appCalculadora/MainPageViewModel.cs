@@ -128,7 +128,6 @@ namespace appCalculadora
                     Num2 = Convert.ToDecimal(TextOnScreen);
                     OperacionResultado();
                     lastOperacion = string.Empty;
-                    TextOnScreen = string.Empty;
                     break;
 
                 case "C":
